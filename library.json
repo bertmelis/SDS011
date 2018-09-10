@@ -1,0 +1,22 @@
+{
+  "name": "DHT",
+  "version": "0.0.1",
+  "keywords": "SDS011, dust, sensor, Arduino, ESP8266",
+  "description": "Non blocking SDS011 sensor library for ESP8266",
+  "homepage": "https://github.com/bertmelis/SDS011",
+  "license": "MIT",
+  "authors": {
+    "name": "Bert Melis",
+    "url": "https://github.com/bertmelis",
+    "maintainer": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bertmelis/SDS011.git",
+    "branch": "master"
+  },
+  "frameworks": "arduino",
+  "platforms": [
+    "espressif8266"
+  ]
+}

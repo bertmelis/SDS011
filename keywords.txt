@@ -1,0 +1,25 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SDS011	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setup	KEYWORD2
+onData	KEYWORD2
+onResponse	KEYWORD2
+onError	KEYWORD2
+setReportMode	KEYWORD2
+setWorkingMode	KEYWORD2
+setWorkingPeriod	KEYWORD2
+queryData	KEYWORD2
+loop	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+#yourLITERAL  LITERAL1
