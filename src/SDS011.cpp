@@ -25,6 +25,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <SDS011.h>
 
+#include <math.h>  // for pow()
+
 SDS011::SDS011() :
   _serial(nullptr),
   _onData(nullptr),
@@ -150,4 +152,30 @@ bool SDS011::_checkCRC(uint8_t buff[], uint8_t crc) {
     crc_calc += buff[i];
   }
   return crc == crc_calc;
+}
+
+float SDS011::correct(float pm2_5, float humidity, float factor, float exp) {
+  if (humidity == 100 || factor == 0) return 0;
+  float pm2_5_corr = pm2_5 / pow(factor * (100 - humidity), exp);
+  return pm2_5_corr;
+}
+
+float SDS011::correct(float pm2_5, float humidity, Correction correction) {
+  float factor = 0.0;
+  float exponent = 0.0;
+  switch (correction) {
+    case AMSTERDAM:
+      factor = 2.3;
+      exponent = -0.38;
+      break;
+    case AMERSFOORT:
+      factor = 3.4;
+      exponent = -0.4;
+      break;
+    case VENLO:
+      factor = 3.9;
+      exponent = -0.43;
+      break;
+  }
+  return correct(pm2_5, humidity, factor, exponent);
 }

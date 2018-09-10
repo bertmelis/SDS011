@@ -57,4 +57,13 @@ class SDS011 {
   onErrorHandler _onError;
   uint8_t _rxBuff[10];
   uint8_t _txBuff[19];
+
+ public:
+  float correct(float raw, float humidity, float factor, float exp);
+  enum Correction {
+    AMSTERDAM,
+    AMERSFOORT,
+    VENLO
+  };
+  float correct(float raw, float humidity, Correction correction);
 };
