@@ -1,5 +1,5 @@
 {
-  "name": "DHT",
+  "name": "SDS011",
   "version": "0.0.1",
   "keywords": "SDS011, dust, sensor, Arduino, ESP8266",
   "description": "Non blocking SDS011 sensor library for ESP8266",
