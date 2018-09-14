@@ -10,8 +10,7 @@ This is yet another SDS011 library, this time completely non blocling. It does c
 ## Installation
 
 * For Arduino IDE: see [the Arduino Guide](https://www.arduino.cc/en/Guide/Libraries#toc4)
-
-~~For Platformio: see the [Platfomio guide](http://docs.platformio.org/en/latest/projectconf/section_env_library.html)~~ Not yet registered
+* For Platformio: see the [Platfomio guide](http://docs.platformio.org/en/latest/projectconf/section_env_library.html)
 
 ## Usage
 

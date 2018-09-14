@@ -125,10 +125,12 @@ void SDS011::loop() {
     } else {
       // 2. check message type
       if (_rxBuff[1] == 0xC5) {             // 3. response or data?
-        if (_onResponse) _onResponse();     // 4. signal response
+        if (_onResponse) _onResponse(_rxBuff[2], _rxBuff[3], _rxBuff[4]);     // 4. signal response
       } else {
-        float pm2_5 = ((_rxBuff[3] * 256.0) + _rxBuff[2]) / 10.0;
-        float pm10 = ((_rxBuff[5] * 256.0) + _rxBuff[4]) / 10.0;
+        uint16_t pm2_5_raw = (_rxBuff[3] << 8) + _rxBuff[2];
+        float pm2_5 = pm2_5_raw / 10.0;
+        uint16_t pm10_raw = (_rxBuff[5] << 8) + _rxBuff[4];
+        float pm10 = pm10_raw / 10.0;
         if (_onData) _onData(pm2_5, pm10);
       }
     }

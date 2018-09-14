@@ -30,7 +30,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <Arduino.h>
 
 typedef std::function<void(float, float)> onDataHandler;  // pm2.5, pm10
-typedef std::function<void(void)> onResponseHandler;
+typedef std::function<void(uint8_t, uint8_t, uint8_t)> onResponseHandler;
 typedef std::function<void(int)> onErrorHandler;
 
 class SDS011 {
