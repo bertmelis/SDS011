@@ -81,7 +81,7 @@ void setup() {
       mqttClient.publish("/SENSOR/PM10", 1, false, String(pm10Value, 1).c_str());
     }
   });
-  sds011.onResponse([](){
+  sds011.onResponse([](uint8_t command, uint8_t set, uint8_t result){
     // command has been executed
   });
   sds011.onError([](int8_t error){
