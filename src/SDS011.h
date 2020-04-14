@@ -29,9 +29,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <Arduino.h>
 
-typedef std::function<void(float, float)> onDataHandler;  // pm2.5, pm10
-typedef std::function<void(uint8_t, uint8_t, uint8_t)> onResponseHandler;
-typedef std::function<void(int)> onErrorHandler;
+typedef std::function<void(float pm2_5, float pm10)> onDataHandler;  // pm2.5, pm10
+typedef std::function<void(uint8_t command, uint8_t set, uint8_t result)> onResponseHandler;
+typedef std::function<void(int error)> onErrorHandler;
 
 class SDS011 {
  public:
