@@ -42,12 +42,12 @@ SDS011::~SDS011() {
 
 void SDS011::setup(HardwareSerial* serial) {
   _serial = serial;
-  _serial->begin(9600, SERIAL_8N1);
+  static_cast<HardwareSerial*>(_serial)->begin(9600, SERIAL_8N1);
 }
 
 void SDS011::setup(SoftwareSerial* serial) {
   _serial = serial;
-  _serial->begin(9600, SWSERIAL_8N1);
+  static_cast<SoftwareSerial*>(_serial)->begin(9600, SWSERIAL_8N1);
 }
 
 void SDS011::onData(onDataHandler handler) {

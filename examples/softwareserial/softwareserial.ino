@@ -4,7 +4,7 @@
 
 SDS011 sds011;
 
-softwareSerial swSerial(D4, D3);
+SoftwareSerial swSerial(D4, D3);
 
 void setup() {
   Serial.begin(74880);
