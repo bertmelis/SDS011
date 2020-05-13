@@ -1,14 +1,12 @@
 #include <Ticker.h>
 #include <SDS011.h>
 
+SoftwareSerial swSerial(D4, D3);
 
 SDS011 sds011;
 
-SoftwareSerial swSerial(D4, D3);
-
 void setup() {
   Serial.begin(74880);
-
 
   sds011.setup(&swSerial);
   sds011.onData([](float pm25Value, float pm10Value) {
