@@ -39,7 +39,7 @@ class SDS011 {
   SDS011();
   ~SDS011();
   void setup(HardwareSerial* serial);
-  void setup(SoftwareSerial* serial)
+  void setup(SoftwareSerial* serial);
   void onData(onDataHandler handler);
   void onResponse(onResponseHandler handler);
   void onError(onErrorHandler handler);  // -1: CRC error
