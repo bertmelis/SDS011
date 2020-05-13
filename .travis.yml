@@ -9,7 +9,8 @@ cache:
         - "~/.platformio"
 
 env:
-    - PLATFORMIO_CI_SRC=examples/sds011-mqtt/sds011-mqtt.ino PLATFORMIO_CI_EXTRA_ARGS="--board=d1_mini"
+    - PLATFORMIO_CI_SRC=examples/mqtt/mqtt.ino PLATFORMIO_CI_EXTRA_ARGS="--board=d1_mini"
+    - PLATFORMIO_CI_SRC=examples/softwareserial/softwareserial.ino PLATFORMIO_CI_EXTRA_ARGS="--board=d1_mini"
     - CPPLINT=true
 
 install:

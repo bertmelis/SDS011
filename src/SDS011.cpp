@@ -45,6 +45,11 @@ void SDS011::setup(HardwareSerial* serial) {
   _serial->begin(9600, SERIAL_8N1);
 }
 
+void SDS011::setup(SoftwareSerial* serial) {
+  _serial = serial;
+  _serial->begin(9600, SWSERIAL_8N1);
+}
+
 void SDS011::onData(onDataHandler handler) {
   _onData = handler;
 }
