@@ -48,7 +48,6 @@ class SDS011 {
   void setWorkingMode(bool mode);  // false: sleep, true, work
   void setWorkingPeriod(uint8_t period);  // period in minutes: work 30 seconds, sleep period*60 - 30 seconds
   void queryData();
-  // void queryData();
   void loop();
 
  private:
