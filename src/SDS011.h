@@ -39,6 +39,9 @@ class SDS011 {
   SDS011();
   ~SDS011();
   void setup(HardwareSerial* serial);
+  #ifdef ESP32
+  void setup(HardwareSerial* serial, uint8_t rx_pin, uint8_t tx_pin);
+  #endif
   void setup(SoftwareSerial* serial);
   void onData(onDataHandler handler);
   void onResponse(onResponseHandler handler);
@@ -47,7 +50,6 @@ class SDS011 {
   void setWorkingMode(bool mode);  // false: sleep, true, work
   void setWorkingPeriod(uint8_t period);  // period in minutes: work 30 seconds, sleep period*60 - 30 seconds
   void queryData();
-  // void queryData();
   void loop();
 
  private:

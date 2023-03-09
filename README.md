@@ -2,8 +2,7 @@
 
 [![Build Status](https://travis-ci.com/bertmelis/SDS011.svg?branch=master)](https://travis-ci.com/bertmelis/SDS011)
 
-SDS011 particle matter sensor library for the Arduino framework for ESP8266.  
-Not tested, but should also work on ESP32
+SDS011 particle matter sensor library for the Arduino framework for ESP8266 and ESP32.
 
 This is yet another SDS011 library, this time completely non blocling. It does come with a `loop()`-method to poll the serial port.
 
