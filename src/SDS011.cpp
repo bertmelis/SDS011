@@ -45,10 +45,12 @@ void SDS011::setup(HardwareSerial* serial) {
   static_cast<HardwareSerial*>(_serial)->begin(9600, SERIAL_8N1);
 }
 
+#ifdef ESP8266
 void SDS011::setup(SoftwareSerial* serial) {
   _serial = serial;
   static_cast<SoftwareSerial*>(_serial)->begin(9600, SWSERIAL_8N1);
 }
+#endif
 
 #ifdef ESP32
 void SDS011::setup(HardwareSerial* serial, uint8_t rx_pin, uint8_t tx_pin) {
