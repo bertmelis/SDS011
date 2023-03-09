@@ -28,6 +28,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <functional>
 
 #include <Arduino.h>
+#include <SoftwareSerial.h>
 
 typedef std::function<void(float pm2_5, float pm10)> onDataHandler;  // pm2.5, pm10
 typedef std::function<void(uint8_t command, uint8_t set, uint8_t result)> onResponseHandler;
@@ -38,9 +39,12 @@ class SDS011 {
   SDS011();
   ~SDS011();
   void setup(HardwareSerial* serial);
-#ifdef ESP32
+  #ifdef ESP32
   void setup(HardwareSerial* serial, uint8_t rx_pin, uint8_t tx_pin);
-#endif
+  #endif
+  #ifdef ESP8266
+  void setup(SoftwareSerial* serial);
+  #endif
   void onData(onDataHandler handler);
   void onResponse(onResponseHandler handler);
   void onError(onErrorHandler handler);  // -1: CRC error
@@ -53,7 +57,7 @@ class SDS011 {
  private:
   uint8_t _getCRC(uint8_t buff[]);
   bool _checkCRC(uint8_t buff[], uint8_t crc);
-  HardwareSerial* _serial;
+  Stream* _serial;
   onDataHandler _onData;
   onResponseHandler _onResponse;
   onErrorHandler _onError;
