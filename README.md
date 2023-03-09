@@ -1,7 +1,5 @@
 # SDS011
 
-[![Build Status](https://travis-ci.com/bertmelis/SDS011.svg?branch=master)](https://travis-ci.com/bertmelis/SDS011)
-
 SDS011 particle matter sensor library for the Arduino framework for ESP8266 and ESP32.
 
 This is yet another SDS011 library, this time completely non blocling. It does come with a `loop()`-method to poll the serial port.
@@ -13,14 +11,14 @@ This is yet another SDS011 library, this time completely non blocling. It does c
 
 ## Usage
 
-You cannot use Serial on ESP8266 as there's only 1 full UART available which will be used by the sensor.
+ESP8266 only has one full UART port so you may want to use SoftwareSerial on this platform.
 
-To do something useful you can combine this lib with MQTT (like [async-mqtt-client](https://github.com/marvinroger/async-mqtt-client)) as in the example below.
+To do something useful you can combine this lib with MQTT (like [espMqttClient](https://github.com/bertmelis/espMqttClient)) as in the example below.
 
 ```C++
 #include <ESP8266WiFi.h>
 #include <Ticker.h>
-#include <AsyncMqttClient.h>
+#include <espMqttClient.h>
 #include <SDS011.h>
 
 const char SSID[] = "My_WiFi";
@@ -28,7 +26,7 @@ const char PASS[] = "My_Pass";
 const IPAddress BROKER = {192, 168, 1, 10};
 
 SDS011 sds011;
-AsyncMqttClient mqttClient;
+espMqttClient mqttClient;
 Ticker mqttReconnectTimer;
 
 WiFiEventHandler wifiConnectHandler;
@@ -51,7 +49,8 @@ void onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
 }
 
 void connectToMqtt() {
-  mqttClient.connect();
+  if (!mqttClient.connect()) {
+    mqttReconnectTimer.once(2, connectToMqtt);
 }
 
 void onMqttConnected(bool sessionPresent) {
