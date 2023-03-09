@@ -42,7 +42,9 @@ class SDS011 {
   #ifdef ESP32
   void setup(HardwareSerial* serial, uint8_t rx_pin, uint8_t tx_pin);
   #endif
+  #ifdef ESP8266
   void setup(SoftwareSerial* serial);
+  #endif
   void onData(onDataHandler handler);
   void onResponse(onResponseHandler handler);
   void onError(onErrorHandler handler);  // -1: CRC error
