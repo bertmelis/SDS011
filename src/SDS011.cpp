@@ -55,7 +55,7 @@ void SDS011::setup(SoftwareSerial* serial) {
 #ifdef ESP32
 void SDS011::setup(HardwareSerial* serial, uint8_t rx_pin, uint8_t tx_pin) {
   _serial = serial;
-  _serial->begin(9600, SERIAL_8N1, rx_pin, tx_pin);
+  static_cast<HardwareSerial*>(_serial)->begin(9600, SERIAL_8N1, rx_pin, tx_pin);
 }
 #endif
 
