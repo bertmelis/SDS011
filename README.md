@@ -2,7 +2,7 @@
 
 SDS011 particle matter sensor library for the Arduino framework for ESP8266 and ESP32.
 
-This is yet another SDS011 library, this time completely non blocling. It does come with a `loop()`-method to poll the serial port.
+This is yet another SDS011 library, this time completely non blocking. It does come with a `loop()`-method to poll the serial port.
 
 ## Installation
 
@@ -57,11 +57,27 @@ void onMqttConnected(bool sessionPresent) {
   connected = true;
 }
 
-void onMqttDisconnect(AsyncMqttClientDisconnectReason reason) {
+void onMqttDisconnect(espMqttClientTypes::DisconnectReason reason) {
   connected = false;
   if (WiFi.isConnected()) {
     mqttReconnectTimer.once(2, connectToMqtt);
   }
+}
+
+void onSensorData(float pm25Value, float pm10Value) {
+  if (connected) {
+    mqttClient.publish("/SENSOR/PM2_5", 1, false, String(pm25Value, 1).c_str());
+    mqttClient.publish("/SENSOR/PM10", 1, false, String(pm10Value, 1).c_str());
+  }
+}
+
+void onSensorResponse(uint8_t command, uint8_t set, uint8_t result) {
+  // log to MQTT
+}
+
+void onSensorError(int8_t error){
+  // error happened
+  // -1: CRC error
 }
 
 void setup() {
@@ -73,19 +89,9 @@ void setup() {
   mqttClient.setServer(BROKER, 1883);
 
   sds011.setup(&Serial);
-  sds011.onData([](float pm25Value, float pm10Value) {
-    if (connected) {
-      mqttClient.publish("/SENSOR/PM2_5", 1, false, String(pm25Value, 1).c_str());
-      mqttClient.publish("/SENSOR/PM10", 1, false, String(pm10Value, 1).c_str());
-    }
-  });
-  sds011.onResponse([](uint8_t command, uint8_t set, uint8_t result){
-    // command has been executed
-  });
-  sds011.onError([](int8_t error){
-    // error happened
-    // -1: CRC error
-  });
+  sds011.onData(onSensorData);
+  sds011.onResponse(onSensorResponse);
+  sds011.onError(onSensorResponse);
   sds011.setWorkingPeriod(5);
 
   connectToWifi();
@@ -94,7 +100,6 @@ void setup() {
 void loop() {
   sds011.loop();
 }
-
 ```
 
 ## To Do
